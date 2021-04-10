@@ -1,9 +1,11 @@
 import React from 'react'
+import NavInshorts from './components/NavInshorts'
+import './styles/app.scss'
 
 const App = () => {
     return (
         <div>
-            <h1>Inshorts</h1>
+            <NavInshorts />
         </div>
     )
 }
