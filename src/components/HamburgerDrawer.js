@@ -6,24 +6,25 @@ import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import MenuIcon from '@material-ui/icons/Menu';
+
+import categories from '../data/category';
 
 import { createMuiTheme, ThemeProvider, useMediaQuery } from "@material-ui/core";
 
 const useStyles = makeStyles({
     list: {
-        width: 250,
+        width: 220,
+        paddingLeft: 10,
+        paddingRight: 5
     },
     fullList: {
         width: 'auto',
     },
 });
 
-export default function HamburgerDrawer() {
+export default function HamburgerDrawer({ setCategory }) {
     const classes = useStyles();
     const [state, setState] = useState({ left: false });
 
@@ -38,43 +39,45 @@ export default function HamburgerDrawer() {
     const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
     const theme = React.useMemo(
-      () =>
-        createMuiTheme({
-          palette: {
-            type: prefersDarkMode ? "dark" : "light",
-          },
-        }),
-      [prefersDarkMode]
+        () =>
+            createMuiTheme({
+            palette: {
+                type: prefersDarkMode ? "dark" : "light",
+            },
+            }),
+        [prefersDarkMode]
     );
 
-  const list = (anchor) => (
-    <div
-      className={clsx(classes.list, {
-        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
-      })}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
-      <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
+    const list = (anchor) => (
+            <div
+            className={clsx(classes.list, {
+                [classes.fullList]: anchor === 'top' || anchor === 'bottom',
+            })}
+            role="presentation"
+            onClick={toggleDrawer(anchor, false)}
+            onKeyDown={toggleDrawer(anchor, false)}
+            >
+        <List>
+            <ListItem>Categories</ListItem>
+        </List>
+        <Divider />
+        <List>
+        {categories.map((text) => (
+            <ListItem 
+                button 
+                onClick={() => setCategory(text)}
+                key={text}
+                style={{
+                    height: 40,
+                    borderRadius: 3
+                }}
+            >
+                <ListItemText primary={text} />
+            </ListItem>
         ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-    </div>
-  );
+        </List>
+        </div>
+    );
 
     return (
         <div>
