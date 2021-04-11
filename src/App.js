@@ -28,6 +28,7 @@ const App = () => {
 
     useEffect(() => {
         newsAPI()
+        // eslint-disable-next-line
     }, [category])
 
     return (
