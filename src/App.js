@@ -6,7 +6,7 @@ import './styles/app.scss'
 
 const baseURL = 'http://api.mediastack.com/v1/news'
 const apiKey = `access_key=${process.env.REACT_APP_API_KEY}`
-const apiSp = 'languages=en&countries=in'
+const apiSp = 'countries=in&count=20'
 
 const App = () => {
     const [category, setCategory] = useState("general")
@@ -24,7 +24,7 @@ const App = () => {
         }
     }
 
-    console.log(newsArray);
+    // console.log(newsArray);
 
     useEffect(() => {
         newsAPI()
@@ -33,7 +33,7 @@ const App = () => {
     return (
         <div>
             <NavInshorts setCategory={setCategory} />
-            <NewsContent />
+            <NewsContent newsArray={newsArray} />
         </div>
     )
 }
