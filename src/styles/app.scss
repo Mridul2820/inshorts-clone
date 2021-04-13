@@ -7,6 +7,14 @@
     font-family: 'Lato', sans-serif;
 }
 
+a:link,
+a:hover,
+a:visited,
+a:active {
+    text-decoration: none;
+    color: inherit;
+}
+
 @import './navinshorts';
 @import './newscontent';
 @import './newscard';

@@ -3,13 +3,13 @@ import React, { useEffect, useState } from 'react'
 import NavInshorts from './components/NavInshorts'
 import NewsContent from './components/NewsContent'
 
-import { currentDate } from "./utils";
+import { currentDate, lastDate } from "./utils";
 import './styles/app.scss'
 
 const baseURL = 'http://api.mediastack.com/v1/news'
 const apiKey = `access_key=${process.env.REACT_APP_API_KEY}`
-// const apiDate= `date=${lastDate},${currentDate}`
-const apiDate= `date=${currentDate}`
+const apiDate= `date=${currentDate},${lastDate}`
+// const apiDate= `date=${currentDate}`
 const apiSp = 'languages=en&countries=in'
 
 const App = () => {
