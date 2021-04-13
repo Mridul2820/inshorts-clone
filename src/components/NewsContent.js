@@ -3,7 +3,7 @@ import React from 'react'
 import uuid from 'react-uuid'
 import NewsCard from './NewsCard'
 
-const NewsContent = ({ newsArray }) => {
+const NewsContent = ({ newsArray, loadMore, setLoadMore }) => {
     return (
         <Container maxWidth="md">
             <div className="content">
@@ -25,6 +25,18 @@ const NewsContent = ({ newsArray }) => {
                 {newsArray.map(newsItem => (
                     <NewsCard key={uuid()} newsItem={newsItem} />
                 ))}
+
+                {loadMore < 100 && (
+                    <>
+                        <hr />
+                        <button
+                            className="loadmore"
+                            onClick={() => setLoadMore(loadMore + 10)}
+                        >
+                            Load More
+                        </button>
+                    </>
+                )}
             </div>
         </Container>
     )

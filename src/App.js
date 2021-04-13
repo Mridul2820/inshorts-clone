@@ -15,30 +15,34 @@ const apiSp = 'languages=en&countries=in'
 const App = () => {
     const [category, setCategory] = useState("general")
     const [newsArray, setNewsArray] = useState([])
-    // const [newsResults, setNewsResults] = useState([])
+    const [loadMore, setLoadMore] = useState(10)
 
     const newsAPI = async () => {
         try {
-            const news = await axios.get(`${baseURL}?${apiKey}&${apiDate}&categories=${category}& ${apiSp}`)
+            const news = await axios.get(`${baseURL}?${apiKey}&${apiDate}&categories=${category}& ${apiSp}&limit=${loadMore}`)
 
-            // console.log(news);
+            // console.log(news.data);
             setNewsArray(news.data.data)
         } catch (error) {
             console.log(error);
         }
     }
 
-    console.log(newsArray);
+    // console.log(newsArray);
 
     useEffect(() => {
         newsAPI()
         // eslint-disable-next-line
-    }, [category])
+    }, [category, loadMore])
 
     return (
         <div>
             <NavInshorts setCategory={setCategory} />
-            <NewsContent newsArray={newsArray} />
+            <NewsContent 
+                loadMore={loadMore}
+                setLoadMore={setLoadMore}
+                newsArray={newsArray}
+            />
         </div>
     )
 }
